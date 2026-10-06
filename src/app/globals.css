@@ -1,26 +1,121 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #0b0911;
+  --bg-2: #120f1b;
+  --surface: rgba(255, 255, 255, 0.055);
+  --surface-2: rgba(255, 255, 255, 0.09);
+  --surface-3: rgba(255, 255, 255, 0.14);
+  --hairline: rgba(255, 255, 255, 0.1);
+  --text: #f6f1e9;
+  --text-2: rgba(246, 241, 233, 0.68);
+  --text-3: rgba(246, 241, 233, 0.42);
+  --coral: #ff6f59;
+  --amber: #ffb547;
+  --orchid: #b57bff;
+  --mint: #5ee6b5;
+  --sky: #64c8ff;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-hairline: var(--hairline);
+  --color-ink: var(--text);
+  --color-ink-2: var(--text-2);
+  --color-ink-3: var(--text-3);
+  --color-coral: var(--coral);
+  --color-amber: var(--amber);
+  --color-orchid: var(--orchid);
+  --color-mint: var(--mint);
+  --color-sky: var(--sky);
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-serif), "New York", Georgia, serif;
+  --font-mono: "SF Mono", var(--font-jetbrains), ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--bg);
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(181, 123, 255, 0.14), transparent 60%),
+    radial-gradient(900px 500px at -10% 10%, rgba(255, 111, 89, 0.12), transparent 60%),
+    var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
+}
+
+::selection {
+  background: rgba(255, 111, 89, 0.4);
+}
+
+.glass {
+  background: rgba(22, 18, 32, 0.62);
+  backdrop-filter: saturate(180%) blur(24px);
+  border: 1px solid var(--hairline);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: saturate(160%) blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.22;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+.text-gradient {
+  background: linear-gradient(100deg, var(--coral), var(--amber) 55%, var(--orchid));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.rank-numeral {
+  font-family: var(--font-display);
+  -webkit-text-stroke: 2px rgba(246, 241, 233, 0.55);
+  color: rgba(11, 9, 17, 0.9);
+  line-height: 0.8;
+}
+
+.shimmer {
+  background: linear-gradient(100deg, rgba(255, 255, 255, 0.04) 20%, rgba(255, 255, 255, 0.11) 40%, rgba(255, 255, 255, 0.04) 60%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.spin {
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
